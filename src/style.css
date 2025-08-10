@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.screen {
+    display: grid;
+    grid-template-columns: 0.9fr 5fr;
+    min-height: 100vh;
+}
+.sidebar {
+    display: grid;
+    background-color: aquamarine;
+    grid-template-rows: 80px 2fr;
+}
+.sidebar-header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.sidebar-header img {
+    height: 60px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+ul li {
+    display: flex;
+    align-items: center;
+}
+ul li > img {
+    height: 40px;
+}
