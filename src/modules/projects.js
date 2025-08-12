@@ -1,16 +1,16 @@
 export default class Project {
-    constructor(name, todoList = []) {
+    constructor(name) {
         this.name = name;
-        this.todoList = todoList;
+        this.taskList = [];
     }
 
-    addToDo(todo) {
-        this.todoList.push(todo);
+    addTask(task) {
+        this.taskList.push(task);
     }
 
-    removeToDo(name) {
-        let index = this.todoList.findIndex(name);
+    removeTask(name) {
+        let index = this.taskList.findIndex(e => e.name === name);
 
-        this.todoList.splice(index, 1);
+        this.taskList.splice(index, 1);
     }
 }

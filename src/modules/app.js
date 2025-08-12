@@ -3,7 +3,7 @@ export default class App {
         this.projectList = projectList;
     }
 
-    addProject(project) {
+    createProject(project) {
         this.projectList.push(project);
     }
 
@@ -11,5 +11,9 @@ export default class App {
         let index = this.projectList.findIndex(name);
 
         this.projectList.splice(index, 1);
+    }
+
+    getProjects() {
+        return this.projectList;
     }
 }
