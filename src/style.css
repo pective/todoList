@@ -30,6 +30,7 @@ ul li {
     display: flex;
     align-items: center;
 }
-ul li > img {
+ul li > svg {
     height: 40px;
+    color: blue;
 }
