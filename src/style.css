@@ -6,13 +6,14 @@ body {
 }
 .screen {
     display: grid;
-    grid-template-columns: 0.9fr 5fr;
+    grid-template-columns: 0.7fr 5fr;
     min-height: 100vh;
 }
 .sidebar {
     display: grid;
     background-color: var(--md-sys-color-secondary-container);
     grid-template-rows: 80px 2fr;
+    justify-content: center;
 }
 .sidebar-header {
     display: flex;
@@ -26,11 +27,18 @@ ul {
     list-style: none;
     padding: 0;
 }
-ul li {
+li {
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
-ul li > svg {
+.project-list li > button {
+    height: 24px;
+    fill: red;
+    background: none;
+    border: none;
+}
+.sidebar-actions li > svg {
     height: 40px;
-    color: blue;
 }
