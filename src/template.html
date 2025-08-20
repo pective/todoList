@@ -25,6 +25,23 @@
         <div class="task-list">
             
         </div>
+
+        <dialog id="taskDialog">
+            <h2>Add task</h2>
+            <label for="taskTitle">Task Title</label>
+            <input type="text" id="taskTitle" name="taskTitle">
+            <label for="taskDescription">Task Description</label>
+            <input type="text" id="taskDescription" name="taskDescription">
+            <label for="taskDueDate">Due Date</label>
+            <input type="date" id="taskDueDate" name="taskDueDate">
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority" name="taskPriority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <button type="submit">Add Task</button>
+        </dialog>
     </div>
 </body>
 </html>
