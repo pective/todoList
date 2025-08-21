@@ -42,3 +42,15 @@ li {
 .sidebar-actions li > svg {
     height: 40px;
 }
+#addTaskButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: 70px;
+    width: 70px;
+    border-radius: 15px;
+    border: none;
+    background-color: var(--md-sys-color-primary);
+    fill: var(--md-sys-color-on-primary);
+    cursor: pointer;
+}
