@@ -1,6 +1,7 @@
 export default class App {
-    constructor(projectList = []) {
+    constructor(projectList = [], selectedProject) {
         this.projectList = projectList;
+        this.selectedProject = selectedProject;
     }
 
     createProject(project) {
@@ -15,5 +16,9 @@ export default class App {
 
     getProjects() {
         return this.projectList;
+    }
+    
+    selectProject(project) {
+        this.selectedProject = project;
     }
 }
