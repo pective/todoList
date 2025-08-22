@@ -18,6 +18,5 @@ export default class Task {
     markDone() {
         this.isDone ? this.isDone = false : this.isDone = true;
     }
-
     
 }

@@ -1,3 +1,5 @@
+import { createTask } from "./dom";
+
 export default class Project {
     constructor(name) {
         this.name = name;
@@ -6,6 +8,8 @@ export default class Project {
 
     addTask(task) {
         this.taskList.push(task);
+
+        createTask()
     }
 
     removeTask(name) {

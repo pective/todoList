@@ -20,14 +20,14 @@ export function createTask() {
     const tasksContainer = document.querySelector(".task-list");
     
     const task = {
-        title: document.querySelector("#taskDialog input[name=[taskTitle]").value,
-        description: document.querySelector("#taskDialog input[name=[taskDescription]").value,
-        dueDate: document.querySelector("#taskDialog input[name=[taskDueDate]").value,
-        priority: document.querySelector("#taskDialog input[name=[taskPriority]").value
+        title: document.querySelector("#taskDialog input[name='taskTitle']").value,
+        description: document.querySelector("#taskDialog input[name='taskDescription']").value,
+        dueDate: document.querySelector("#taskDialog input[name='taskDueDate']").value,
+        priority: document.querySelector("#taskDialog select[name='taskPriority']").value
     }
 
     const taskBody = document.createElement("div");
-    taskBody.classList.add("")
+    taskBody.classList.add("task-body")
 
     const titleElement = document.createElement("h2");
     titleElement.textContent = task.title;
@@ -36,7 +36,7 @@ export function createTask() {
     descElement.textContent = task.description;
 
     const dateElement = document.createElement("h3")
-    dateElement.textContent = format(task.dueDate, 'P');
+    dateElement.textContent = task.dueDate ? format(new Date(task.dueDate), 'P') : 'No due date';
 
     const priorityElement = document.createElement("div");
     priorityElement.textContent = task.priority;

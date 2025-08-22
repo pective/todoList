@@ -11,7 +11,19 @@ document.querySelector("#addTaskButton").addEventListener("click", (e) => {
     e.preventDefault();
 })
 
+const taskForm = dialog.querySelector("form");
+taskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    createTask();
+    taskForm.reset();
+    dialog.close();
+});
+
 const appControl = new App();
-appControl.createProject(new Project("Home"));
+
+const homeProject = new Project("Home")
+appControl.createProject(homeProject);
+
+homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, false, homeProject));
 
 createProjectList(appControl.getProjects())
