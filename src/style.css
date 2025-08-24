@@ -6,7 +6,7 @@ body {
 }
 .screen {
     display: grid;
-    grid-template-columns: 0.7fr 5fr;
+    grid-template-columns: 200px 5fr;
     min-height: 100vh;
 }
 .sidebar {
