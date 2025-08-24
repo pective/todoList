@@ -1,4 +1,4 @@
-import { createTask } from "./dom";
+import { DOMController } from "./dom";
 
 export default class Project {
     constructor(name) {
@@ -9,12 +9,17 @@ export default class Project {
     addTask(task) {
         this.taskList.push(task);
 
-        createTask()
+        DOMController.createTask();
     }
 
     removeTask(name) {
         let index = this.taskList.findIndex(e => e.name === name);
 
         this.taskList.splice(index, 1);
+    }
+
+    getTasks() {
+        console.log(this.taskList);
+        return this.taskList;
     }
 }

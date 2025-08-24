@@ -2,7 +2,7 @@ import "./style.css";
 import Task from "./modules/task";
 import Project from "./modules/projects";
 import App from "./modules/app";
-import { createProjectList, createTask } from "./modules/dom";
+import { DOMController } from "./modules/dom";
 
 const dialog = document.querySelector("#taskDialog");
 
@@ -14,16 +14,17 @@ document.querySelector("#addTaskButton").addEventListener("click", (e) => {
 const taskForm = dialog.querySelector("form");
 taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    createTask();
+    DOMController.createTask();
     taskForm.reset();
     dialog.close();
 });
 
-const appControl = new App();
+let projectList = [];
+const homeProject = new Project("Home");
 
-const homeProject = new Project("Home")
+const appControl = new App(projectList, homeProject);
 appControl.createProject(homeProject);
 
 homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, false, homeProject));
 
-createProjectList(appControl.getProjects())
+DOMController.createProjectList(appControl.getProjects());
