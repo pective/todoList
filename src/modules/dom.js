@@ -46,7 +46,7 @@ export class DOMController {
         descElement.textContent = taskInfo.description;
 
         const dateElement = document.createElement("h3")
-        dateElement.textContent = taskInfo.date ? format(new Date(taskInfo.date), 'P') : 'No due date';
+        dateElement.textContent = taskInfo.date;
 
         const priorityElement = document.createElement("div");
         priorityElement.textContent = taskInfo.priority;
