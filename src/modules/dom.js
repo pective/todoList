@@ -19,9 +19,7 @@ export class DOMController {
         }
     }
 
-    static createTask() {
-        const tasksContainer = document.querySelector(".task-list");
-        
+    static taskFromForm() {
         const taskInfo = {
             title: document.querySelector("#taskDialog input[name='taskTitle']").value,
             description: document.querySelector("#taskDialog input[name='taskDescription']").value,
@@ -29,19 +27,26 @@ export class DOMController {
             priority: document.querySelector("#taskDialog select[name='taskPriority']").value
         }
 
-        const task = new Task(taskInfo.title, taskInfo.description, taskInfo.dueDate ? format(new Date(taskInfo.dueDate), 'P') : 'No due date', taskInfo.priority, false, "Home")
+        const task = new Task(taskInfo.title, taskInfo.description, taskInfo.dueDate ? format(new Date(taskInfo.dueDate), 'P') : 'No due date', taskInfo.priority, false, "Home");
+        return task;
+    }
+
+    static createTask() {
+        const tasksContainer = document.querySelector(".task-list");
+        
+        const taskInfo = this.taskFromForm();
 
         const taskBody = document.createElement("div");
         taskBody.classList.add("task-body")
 
         const titleElement = document.createElement("h2");
-        titleElement.textContent = taskInfo.title;
+        titleElement.textContent = taskInfo.name;
 
         const descElement = document.createElement("p");
         descElement.textContent = taskInfo.description;
 
         const dateElement = document.createElement("h3")
-        dateElement.textContent = taskInfo.dueDate ? format(new Date(taskInfo.dueDate), 'P') : 'No due date';
+        dateElement.textContent = taskInfo.date ? format(new Date(taskInfo.date), 'P') : 'No due date';
 
         const priorityElement = document.createElement("div");
         priorityElement.textContent = taskInfo.priority;

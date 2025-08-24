@@ -17,14 +17,17 @@ taskForm.addEventListener("submit", (e) => {
     DOMController.createTask();
     taskForm.reset();
     dialog.close();
+
 });
+
 
 let projectList = [];
 const homeProject = new Project("Home");
+let selectedProject = homeProject;
 
-const appControl = new App(projectList, homeProject);
+const appControl = new App(projectList, selectedProject);
 appControl.createProject(homeProject);
 
-homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, false, homeProject));
+homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, false, selectedProject));
 
 DOMController.createProjectList(appControl.getProjects());
