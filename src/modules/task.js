@@ -23,13 +23,7 @@ export default class Task {
     
     #formatDate(date) {
         if (!date) return 'No due date';
-        try {
-            const d = date instanceof Date ? date : new Date(date);
-            if (isNaN(d.getTime())) return 'No due date';
-            return format(d, 'P');
-        } catch (e) {
-            return 'No due date';
-        }
+        return format(date, 'P');
     }
     
 }
