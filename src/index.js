@@ -20,7 +20,6 @@ taskForm.addEventListener("submit", (e) => {
 
 });
 
-
 let projectList = [];
 const homeProject = new Project("Home");
 let selectedProject = homeProject;
@@ -31,3 +30,4 @@ appControl.createProject(homeProject);
 homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, false, selectedProject));
 
 DOMController.createProjectList(appControl.getProjects());
+DOMController.createTaskList(selectedProject.getTasks());

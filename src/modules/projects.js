@@ -19,7 +19,6 @@ export default class Project {
     }
 
     getTasks() {
-        console.log(this.taskList);
         return this.taskList;
     }
 }

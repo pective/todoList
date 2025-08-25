@@ -27,7 +27,14 @@ export class DOMController {
             priority: document.querySelector("#taskDialog select[name='taskPriority']").value
         }
 
-        const task = new Task(taskInfo.title, taskInfo.description, taskInfo.dueDate ? format(new Date(taskInfo.dueDate), 'P') : 'No due date', taskInfo.priority, false, "Home");
+        const task = new Task(
+            taskInfo.title,
+            taskInfo.description,
+            taskInfo.dueDate,
+            taskInfo.priority,
+            false,
+            "Home"
+        );
         return task;
     }
 
@@ -57,5 +64,33 @@ export class DOMController {
         taskBody.appendChild(priorityElement);
 
         tasksContainer.appendChild(taskBody);
+    }
+
+    static createTaskList(taskList) {
+        for (let task of taskList) {
+            const tasksContainer = document.querySelector(".task-list");
+        
+        const taskBody = document.createElement("div");
+        taskBody.classList.add("task-body")
+
+        const titleElement = document.createElement("h2");
+        titleElement.textContent = task.name;
+
+        const descElement = document.createElement("p");
+        descElement.textContent = task.description;
+
+        const dateElement = document.createElement("h3")
+        dateElement.textContent = task.date;
+
+        const priorityElement = document.createElement("div");
+        priorityElement.textContent = task.priority;
+
+        taskBody.appendChild(titleElement);
+        taskBody.appendChild(descElement);
+        taskBody.appendChild(dateElement);
+        taskBody.appendChild(priorityElement);
+
+        tasksContainer.appendChild(taskBody);
+        }
     }
 }
