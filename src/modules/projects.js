@@ -1,5 +1,3 @@
-import { DOMController } from "./dom";
-
 export default class Project {
     constructor(name) {
         this.name = name;
@@ -8,8 +6,6 @@ export default class Project {
 
     addTask(task) {
         this.taskList.push(task);
-
-        DOMController.createTask();
     }
 
     removeTask(name) {
