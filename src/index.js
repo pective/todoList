@@ -27,8 +27,8 @@ let selectedProject = homeProject;
 const appControl = new App(projectList, selectedProject);
 appControl.createProject(homeProject);
 
-homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, false, selectedProject));
-homeProject.addTask(new Task("Code", "Finish that website boy", new Date(), 3, true, selectedProject));
+homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, selectedProject));
+homeProject.addTask(new Task("Code", "Finish that website boy", new Date(), 3, selectedProject));
 
 
 DOMController.createProjectList(appControl.getProjects());

@@ -11,6 +11,10 @@ export class DOMController {
         taskBody.classList.add("task-body");
         if (task.isDone) taskBody.classList.add("checked");
 
+        const checkBtn = document.createElement("button");
+        checkBtn.type = "button";
+        checkBtn.className = "task-check";
+
         const titleElement = document.createElement("h2");
         titleElement.textContent = task.name;
 
@@ -23,15 +27,16 @@ export class DOMController {
         const priorityElement = document.createElement("div");
         priorityElement.textContent = task.priority;
 
+        taskBody.appendChild(checkBtn);
         taskBody.appendChild(titleElement);
         taskBody.appendChild(descElement);
         taskBody.appendChild(dateElement);
         taskBody.appendChild(priorityElement);
 
-        // Toggle done state and class when clicking the task body
-        taskBody.addEventListener("click", () => {
-            task.markDone();
-            taskBody.classList.toggle("checked", task.isDone);
+        taskBody.addEventListener("click", (e) => {
+            const toggle = e.target.closest(".task-check");
+            if (!toggle) return;
+            taskBody.classList.toggle("checked");
         });
 
         return taskBody;
@@ -56,7 +61,6 @@ export class DOMController {
         const dueDateRaw = document.querySelector("#taskDialog input[name='taskDueDate']").value;
         const priority = document.querySelector("#taskDialog select[name='taskPriority']").value;
 
-        // Convert input date string to Date if present to satisfy date-fns format
         const dueDate = dueDateRaw ? new Date(dueDateRaw) : null;
 
         return new Task(title, description, dueDate, priority, false, "Home");

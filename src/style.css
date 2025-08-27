@@ -50,8 +50,8 @@ li {
     width: 70px;
     border-radius: 15px;
     border: none;
-    background-color: var(--md-sys-color-primary);
-    fill: var(--md-sys-color-on-primary);
+    background-color: var(--md-sys-color-tertiary);
+    fill: var(--md-sys-color-on-tertiary);
     cursor: pointer;
 }
 .task-list {
@@ -68,11 +68,29 @@ li {
     border-radius: 10px;
     background-color: var(--md-sys-color-surface-container-high);
     justify-content: space-between;
+    position: relative;
+    padding-left: 50px;
 }
-.task-body::before {
+.task-check {
     content: '';
-    height: 18px;
-    width: 18px;
+    position: absolute;
+    left: 10px;
+    height: 25px;
+    width: 25px;
     border: 3px solid #444444;
     border-radius: 3px;
+    cursor: pointer;
+}
+.task-body + .checked  {
+    text-decoration: line-through;
+    color: #bbbbbb;
+}
+
+.task-body + .checked > .task-check  {
+    background-image: url(./imgs/check-bold.svg);
+    background-position: center;
+    background-size: cover;
+    background-color: var(--md-sys-color-primary);
+    border-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
 }

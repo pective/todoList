@@ -6,19 +6,13 @@ export default class Task {
         description,
         date,
         priority,
-        isDone = false,
         project,
     ) {
         this.name = name;
         this.description = description;
         this.date = this.#formatDate(date);
         this.priority = priority;
-        this.isDone = isDone;
         this.project = project;
-    }
-
-    markDone() {
-        this.isDone ? this.isDone = false : this.isDone = true;
     }
     
     #formatDate(date) {
