@@ -1,10 +1,41 @@
-import { format } from "date-fns";
 import Task from "./task";
 
 const projectContainer = document.querySelector(".project-list")
 
 export class DOMController {
     constructor() {}
+
+    // Build a single task DOM element from a Task instance
+    static #buildTaskElement(task) {
+        const taskBody = document.createElement("div");
+        taskBody.classList.add("task-body");
+        if (task.isDone) taskBody.classList.add("checked");
+
+        const titleElement = document.createElement("h2");
+        titleElement.textContent = task.name;
+
+        const descElement = document.createElement("p");
+        descElement.textContent = task.description;
+
+        const dateElement = document.createElement("h3");
+        dateElement.textContent = task.date;
+
+        const priorityElement = document.createElement("div");
+        priorityElement.textContent = task.priority;
+
+        taskBody.appendChild(titleElement);
+        taskBody.appendChild(descElement);
+        taskBody.appendChild(dateElement);
+        taskBody.appendChild(priorityElement);
+
+        // Toggle done state and class when clicking the task body
+        taskBody.addEventListener("click", () => {
+            task.markDone();
+            taskBody.classList.toggle("checked", task.isDone);
+        });
+
+        return taskBody;
+    }
 
     static createProjectList(projects) {
         for (let i = 0; i < projects.length; i++) {
@@ -20,77 +51,30 @@ export class DOMController {
     }
 
     static taskFromForm() {
-        const taskInfo = {
-            title: document.querySelector("#taskDialog input[name='taskTitle']").value,
-            description: document.querySelector("#taskDialog input[name='taskDescription']").value,
-            dueDate: document.querySelector("#taskDialog input[name='taskDueDate']").value,
-            priority: document.querySelector("#taskDialog select[name='taskPriority']").value
-        }
+        const title = document.querySelector("#taskDialog input[name='taskTitle']").value;
+        const description = document.querySelector("#taskDialog input[name='taskDescription']").value;
+        const dueDateRaw = document.querySelector("#taskDialog input[name='taskDueDate']").value;
+        const priority = document.querySelector("#taskDialog select[name='taskPriority']").value;
 
-        const task = new Task(
-            taskInfo.title,
-            taskInfo.description,
-            taskInfo.dueDate,
-            taskInfo.priority,
-            false,
-            "Home"
-        );
-        return task;
+        // Convert input date string to Date if present to satisfy date-fns format
+        const dueDate = dueDateRaw ? new Date(dueDateRaw) : null;
+
+        return new Task(title, description, dueDate, priority, false, "Home");
     }
 
     static createTask() {
         const tasksContainer = document.querySelector(".task-list");
-        
-        const taskInfo = this.taskFromForm();
-
-        const taskBody = document.createElement("div");
-        taskBody.classList.add("task-body")
-
-        const titleElement = document.createElement("h2");
-        titleElement.textContent = taskInfo.name;
-
-        const descElement = document.createElement("p");
-        descElement.textContent = taskInfo.description;
-
-        const dateElement = document.createElement("h3")
-        dateElement.textContent = taskInfo.date;
-
-        const priorityElement = document.createElement("div");
-        priorityElement.textContent = taskInfo.priority;
-
-        taskBody.appendChild(titleElement);
-        taskBody.appendChild(descElement);
-        taskBody.appendChild(dateElement);
-        taskBody.appendChild(priorityElement);
-
-        tasksContainer.appendChild(taskBody);
+        const task = this.taskFromForm();
+        const taskElement = this.#buildTaskElement(task);
+        tasksContainer.appendChild(taskElement);
     }
 
     static createTaskList(taskList) {
+        const tasksContainer = document.querySelector(".task-list");
+        const fragment = document.createDocumentFragment();
         for (let task of taskList) {
-            const tasksContainer = document.querySelector(".task-list");
-        
-        const taskBody = document.createElement("div");
-        taskBody.classList.add("task-body")
-
-        const titleElement = document.createElement("h2");
-        titleElement.textContent = task.name;
-
-        const descElement = document.createElement("p");
-        descElement.textContent = task.description;
-
-        const dateElement = document.createElement("h3")
-        dateElement.textContent = task.date;
-
-        const priorityElement = document.createElement("div");
-        priorityElement.textContent = task.priority;
-
-        taskBody.appendChild(titleElement);
-        taskBody.appendChild(descElement);
-        taskBody.appendChild(dateElement);
-        taskBody.appendChild(priorityElement);
-
-        tasksContainer.appendChild(taskBody);
+            fragment.appendChild(this.#buildTaskElement(task));
         }
+        tasksContainer.appendChild(fragment);
     }
 }
