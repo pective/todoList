@@ -69,6 +69,8 @@ export class DOMController {
         const task = this.taskFromForm();
         const taskElement = this.#buildTaskElement(task);
         tasksContainer.appendChild(taskElement);
+
+        return task;
     }
 
     static createTaskList(taskList) {

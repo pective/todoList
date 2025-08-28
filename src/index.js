@@ -11,9 +11,10 @@ document.querySelector("#addTaskButton").addEventListener("click", (e) => {
     taskDialog.showModal();
 })
 
-taskDialog.querySelector("form").addEventListener("submit", (e) => {
+const taskForm = taskDialog.querySelector("form")
+taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    DOMController.createTask();
+    selectedProject.addTask(DOMController.createTask());
     taskForm.reset();
     taskDialog.close();
 });
@@ -22,9 +23,11 @@ document.querySelector("#addProjectButton").addEventListener("click", (e) => {
     projectDialog.showModal();
 })
 
-projectDialog.querySelector("form").addEventListener("submit", (e) => {
+const projectForm = projectDialog.querySelector("form")
+projectForm.addEventListener("submit", (e) => {
     e.preventDefault();
     DOMController.createProject()
+    projectForm.reset();
     projectDialog.close();
 })
 
