@@ -16,9 +16,9 @@
                 <ul class="project-list">
                     
                 </ul>
-                <ul class="sidebar-actions">
-                    <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>Add project</li>
-                </ul>
+                <div class="sidebar-actions">
+                    <button id="addProjectButton"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>Add project</button>
+                </div>
             </div>
         </div>
 
@@ -42,6 +42,15 @@
                     <option value="high">High</option>
                 </select>
                 <button type="submit">Add Task</button>
+            </form>
+        </dialog>
+
+        <dialog id="projectDialog">
+            <form>
+                <h1>Add Project</h1>
+                <label for="projectName">Project Name</label>
+                <input type="text" id="projectName" name="projectName">
+                <button type="submit">Add Project</button>
             </form>
         </dialog>
     </div>

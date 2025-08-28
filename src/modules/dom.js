@@ -1,11 +1,11 @@
 import Task from "./task";
+import Project from "./projects";
 
 const projectContainer = document.querySelector(".project-list")
 
 export class DOMController {
     constructor() {}
 
-    // Build a single task DOM element from a Task instance
     static #buildTaskElement(task) {
         const taskBody = document.createElement("div");
         taskBody.classList.add("task-body");
@@ -42,17 +42,15 @@ export class DOMController {
         return taskBody;
     }
 
-    static createProjectList(projects) {
-        for (let i = 0; i < projects.length; i++) {
-            const projectElement = document.createElement("li");
-            projectElement.textContent = projects[i].name;
+    static #buildProjectElement(project) {
+        const projectElement = document.createElement("li");
+        projectElement.textContent = project.name;
 
-            const projectRemove = document.createElement("button");
-            projectRemove.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>`;
+        const projectRemove = document.createElement("button");
+        projectRemove.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>`;
 
-            projectElement.appendChild(projectRemove);
-            projectContainer.appendChild(projectElement);
-        }
+        projectElement.appendChild(projectRemove);
+        return projectElement;
     }
 
     static taskFromForm() {
@@ -63,7 +61,7 @@ export class DOMController {
 
         const dueDate = dueDateRaw ? new Date(dueDateRaw) : null;
 
-        return new Task(title, description, dueDate, priority, false, "Home");
+        return new Task(title, description, dueDate, priority, false);
     }
 
     static createTask() {
@@ -80,5 +78,26 @@ export class DOMController {
             fragment.appendChild(this.#buildTaskElement(task));
         }
         tasksContainer.appendChild(fragment);
+    }
+
+    static projectFromForm() {
+        const name = document.querySelector("#projectDialog input[name='projectName']").value;
+
+        return new Project(name);
+    }
+
+    static createProject() {
+        const project = this.projectFromForm();
+        const projectElement = this.#buildProjectElement(project);
+
+        projectContainer.appendChild(projectElement);
+    }
+
+    static createProjectList(projects) {
+        const fragment = document.createDocumentFragment();
+        for (let project of projects) {
+            fragment.appendChild(this.#buildProjectElement(project));
+        }
+        projectContainer.appendChild(fragment);
     }
 }

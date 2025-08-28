@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { selectedProject } from "..";
 
 export default class Task {
     constructor (
@@ -6,7 +7,7 @@ export default class Task {
         description,
         date,
         priority,
-        project,
+        project = selectedProject,
     ) {
         this.name = name;
         this.description = description;
