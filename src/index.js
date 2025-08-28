@@ -26,7 +26,7 @@ document.querySelector("#addProjectButton").addEventListener("click", (e) => {
 const projectForm = projectDialog.querySelector("form")
 projectForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    DOMController.createProject()
+    appControl.createProject(DOMController.createProject());
     projectForm.reset();
     projectDialog.close();
 })

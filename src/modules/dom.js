@@ -93,6 +93,7 @@ export class DOMController {
         const projectElement = this.#buildProjectElement(project);
 
         projectContainer.appendChild(projectElement);
+        return project;
     }
 
     static createProjectList(projects) {
