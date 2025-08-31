@@ -9,11 +9,10 @@ export class DOMController {
     static #buildTaskElement(task) {
         const taskBody = document.createElement("div");
         taskBody.classList.add("task-body");
-        if (task.isDone) taskBody.classList.add("checked");
 
         const checkBtn = document.createElement("button");
         checkBtn.type = "button";
-        checkBtn.className = "task-check";
+        checkBtn.classList.add("task-check");
 
         const titleElement = document.createElement("h2");
         titleElement.textContent = task.name;
@@ -33,9 +32,9 @@ export class DOMController {
         taskBody.appendChild(dateElement);
         taskBody.appendChild(priorityElement);
 
-        taskBody.addEventListener("click", (e) => {
-            const toggle = e.target.closest(".task-check");
-            if (!toggle) return;
+        checkBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            console.log("check clicked:", task.name);
             taskBody.classList.toggle("checked");
         });
 
@@ -74,9 +73,12 @@ export class DOMController {
         return task;
     }
 
-    static createTaskList(taskList) {
+    static createTaskList(project) {
         const tasksContainer = document.querySelector(".task-list");
         tasksContainer.innerHTML = "";
+
+        const taskList = project.getTasks();
+
         const fragment = document.createDocumentFragment();
         for (let task of taskList) {
             fragment.appendChild(this.#buildTaskElement(task));
@@ -99,6 +101,7 @@ export class DOMController {
     }
 
     static createProjectList(projects) {
+        projectContainer.innerHTML = "";
         const fragment = document.createDocumentFragment();
         for (let project of projects) {
             fragment.appendChild(this.#buildProjectElement(project));

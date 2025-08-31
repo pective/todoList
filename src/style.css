@@ -32,6 +32,7 @@ li {
     align-items: center;
     justify-content: center;
     gap: 15px;
+    border-radius: 8px;
 }
 .project-list li > button {
     height: 24px;
@@ -90,12 +91,12 @@ li {
     border-radius: 3px;
     cursor: pointer;
 }
-.task-body + .checked  {
+.task-body.checked  {
     text-decoration: line-through;
     color: #bbbbbb;
 }
 
-.task-body + .checked > .task-check  {
+.task-body.checked > .task-check  {
     background-image: url(./imgs/check-bold.svg);
     background-position: center;
     background-size: cover;

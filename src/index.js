@@ -14,9 +14,11 @@ document.querySelector("#addTaskButton").addEventListener("click", (e) => {
 const taskForm = taskDialog.querySelector("form")
 taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    selectedProject.addTask(DOMController.createTask());
+    selectedProject.addTask(DOMController.taskFromForm());
     taskForm.reset();
     taskDialog.close();
+
+    DOMController.createTaskList(selectedProject);
 });
 
 document.querySelector("#addProjectButton").addEventListener("click", (e) => {
@@ -29,6 +31,9 @@ projectForm.addEventListener("submit", (e) => {
     appControl.createProject(DOMController.createProject());
     projectForm.reset();
     projectDialog.close();
+
+    DOMController.createProjectList(appControl.getProjects());
+    renderProjects();
 })
 
 let projectList = [];
@@ -40,9 +45,32 @@ const appControl = new App(projectList, selectedProject);
 appControl.createProject(homeProject);
 appControl.createProject(schoolProject);
 
-homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, selectedProject));
-homeProject.addTask(new Task("Code", "Finish that website boy", new Date(), 3, selectedProject));
+homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, false));
+homeProject.addTask(new Task("Code", "Finish that website boy", new Date(), 3, false));
 
 
 DOMController.createProjectList(appControl.getProjects());
-DOMController.createTaskList(selectedProject.getTasks());
+DOMController.createTaskList(selectedProject);
+
+function renderProjects() {
+    const projectElements = document.querySelectorAll(".project-element");
+    projectElements.forEach((e) => {
+        e.addEventListener("click", () => {
+            const projectName = e.textContent.trim();
+            const proj = appControl.getProjects().find(p => p.name == projectName);
+            if (!proj) return;
+
+            selectedProject = proj;
+
+            projectElements.forEach((el) => {
+                el.classList.remove("selected");
+                el.style.removeProperty("background");
+            });
+            e.classList.add("selected");
+            e.style.background = "#C8D4E6";
+
+            DOMController.createTaskList(selectedProject);
+        })
+    })
+}
+renderProjects()
