@@ -32,8 +32,13 @@ export class DOMController {
         taskBody.appendChild(dateElement);
         taskBody.appendChild(priorityElement);
 
+        if(task.isDone) {
+            taskBody.classList.toggle("checked");
+        }
+
         checkBtn.addEventListener("click", (e) => {
             e.stopPropagation();
+            task.markDone();
             console.log("check clicked:", task.name);
             taskBody.classList.toggle("checked");
         });
