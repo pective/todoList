@@ -20,6 +20,12 @@ taskForm.addEventListener("submit", (e) => {
 
     DOMController.createTaskList(selectedProject);
 });
+taskForm.addEventListener("reset", (e) => {
+    e.preventDefault();
+    taskForm.reset();
+    taskDialog.close();
+});
+
 
 document.querySelector("#addProjectButton").addEventListener("click", (e) => {
     projectDialog.showModal();

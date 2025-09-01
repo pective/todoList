@@ -29,21 +29,32 @@
         <button id="addTaskButton"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></button>
 
         <dialog id="taskDialog">
+            <h1>Add task</h1>
             <form>
-                <h2>Add task</h2>
-                <label for="taskTitle">Task Title</label>
-                <input type="text" id="taskTitle" name="taskTitle">
-                <label for="taskDescription">Task Description</label>
-                <input type="text" id="taskDescription" name="taskDescription">
-                <label for="taskDueDate">Due Date</label>
-                <input type="date" id="taskDueDate" name="taskDueDate">
-                <label for="taskPriority">Priority</label>
-                <select id="taskPriority" name="taskPriority">
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
-                <button type="submit">Add Task</button>
+                <fieldset id="taskTitle">
+                    <legend>Task Title</legend>
+                    <input type="text" name="taskTitle" required>
+                </fieldset>
+                <fieldset id="taskDescription">
+                    <legend>Task Description</legend>
+                    <input type="text" name="taskDescription">
+                </fieldset>
+                <fieldset>
+                    <legend>Due Date</legend>
+                    <input type="date" id="taskDueDate" name="taskDueDate">
+                </fieldset>
+                <fieldset>
+                    <legend>Priority</legend>
+                    <select id="taskPriority" name="taskPriority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </fieldset>
+                <div class="task-dialog-buttons">
+                    <button type="reset" id="cancelTaskButton">Cancel</button>
+                    <button type="submit">Add Task</button>
+                </div>
             </form>
         </dialog>
 
@@ -51,7 +62,7 @@
             <form>
                 <h1>Add Project</h1>
                 <label for="projectName">Project Name</label>
-                <input type="text" id="projectName" name="projectName">
+                <input type="text" id="projectName" name="projectName" required>
                 <button type="submit">Add Project</button>
             </form>
         </dialog>
