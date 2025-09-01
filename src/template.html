@@ -51,7 +51,7 @@
                         <option value="high">High</option>
                     </select>
                 </fieldset>
-                <div class="task-dialog-buttons">
+                <div class="dialog-buttons">
                     <button type="reset" id="cancelTaskButton">Cancel</button>
                     <button type="submit">Add Task</button>
                 </div>
@@ -59,11 +59,16 @@
         </dialog>
 
         <dialog id="projectDialog">
+            <h1>Add Project</h1>
             <form>
-                <h1>Add Project</h1>
-                <label for="projectName">Project Name</label>
-                <input type="text" id="projectName" name="projectName" required>
-                <button type="submit">Add Project</button>
+                <fieldset>
+                    <legend>Project Name</legend>
+                    <input type="text" id="projectName" name="projectName" required>
+                </fieldset>
+                <div class="dialog-buttons">
+                    <button type="reset" id="cancelProjectButton">Cancel</button>
+                    <button type="submit">Add Project</button>
+                </div>
             </form>
         </dialog>
     </div>

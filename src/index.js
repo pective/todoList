@@ -41,6 +41,11 @@ projectForm.addEventListener("submit", (e) => {
     DOMController.createProjectList(appControl.getProjects());
     renderProjects();
 })
+projectForm.addEventListener("reset", (e) => {
+    e.preventDefault();
+    projectForm.reset();
+    projectDialog.close();
+})
 
 let projectList = [];
 const homeProject = new Project("Home");
