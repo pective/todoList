@@ -42,7 +42,7 @@ export class DOMController {
 
             editForm.querySelector("input[name='taskTitle']").value = task.name || "";
             editForm.querySelector("input[name='taskDescription']").value = task.description || "";
-            editForm.querySelector("input[name='taskDueDate']").value = formatISO(new Date(task.date), { representation: 'date' }) || "";
+            editForm.querySelector("input[name='taskDueDate']").value = task.date == "No due date" ? "" : formatISO(new Date(task.date), { representation: 'date' });
             editForm.querySelector("select[name='taskPriority']").value = String(task.priority ?? "");
 
             taskEditDialog.showModal();
@@ -184,7 +184,7 @@ export class DOMController {
 
             const name = editForm.querySelector("input[name='taskTitle']").value;
             const description = editForm.querySelector("input[name='taskDescription']").value;
-            const dueDateRaw = editForm.querySelector("input[name='taskDueDate']").value;
+            const dueDateRaw = editForm.querySelector("input[name='taskDueDate']").value ? editForm.querySelector("input[name='taskDueDate']").value : "No due date";
             const priority = editForm.querySelector("select[name='taskPriority']").value;
 
             editingTask.edit(name, description, dueDateRaw, priority);
