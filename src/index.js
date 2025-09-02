@@ -4,44 +4,7 @@ import Project from "./modules/projects";
 import App from "./modules/app";
 import { DOMController } from "./modules/dom";
 
-const taskDialog = document.querySelector("#taskDialog");
-const projectDialog = document.querySelector("#projectDialog")
-
-document.querySelector("#addTaskButton").addEventListener("click", (e) => {
-    taskDialog.showModal();
-})
-
-const taskForm = taskDialog.querySelector("form")
-taskForm.addEventListener("submit", (e) => {
-    selectedProject.addTask(DOMController.taskFromForm());
-    taskForm.reset();
-    taskDialog.close();
-
-    DOMController.createTaskList(selectedProject);
-    e.preventDefault();
-});
-taskForm.addEventListener("reset", () => {
-    setTimeout(() => taskDialog.close(), 0);
-});
-
-
-document.querySelector("#addProjectButton").addEventListener("click", (e) => {
-    projectDialog.showModal();
-})
-
-const projectForm = projectDialog.querySelector("form")
-projectForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    appControl.createProject(DOMController.createProject());
-    projectForm.reset();
-    projectDialog.close();
-
-    DOMController.createProjectList(appControl.getProjects());
-    renderProjects();
-})
-projectForm.addEventListener("reset", () => {
-    setTimeout(() => projectDialog.close(), 0);
-})
+DOMController.addEventListeners();
 
 let projectList = [];
 const homeProject = new Project("Home");
@@ -54,7 +17,6 @@ appControl.createProject(schoolProject);
 
 homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, false));
 homeProject.addTask(new Task("Code", "Finish that website boy", new Date(), 3, false));
-
 
 DOMController.createProjectList(appControl.getProjects());
 DOMController.createTaskList(selectedProject);

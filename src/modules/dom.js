@@ -1,5 +1,6 @@
 import Task from "./task";
 import Project from "./projects";
+import { selectedProject } from "..";
 
 const projectContainer = document.querySelector(".project-list")
 
@@ -112,5 +113,46 @@ export class DOMController {
             fragment.appendChild(this.#buildProjectElement(project));
         }
         projectContainer.appendChild(fragment);
+    }
+
+    static addEventListeners() {
+        const taskDialog = document.querySelector("#taskDialog");
+        const projectDialog = document.querySelector("#projectDialog")
+        
+        document.querySelector("#addTaskButton").addEventListener("click", (e) => {
+            taskDialog.showModal();
+        })
+        
+        const taskForm = taskDialog.querySelector("form")
+        taskForm.addEventListener("submit", (e) => {
+            selectedProject.addTask(DOMController.taskFromForm());
+            taskForm.reset();
+            taskDialog.close();
+        
+            DOMController.createTaskList(selectedProject);
+            e.preventDefault();
+        });
+        taskForm.addEventListener("reset", () => {
+            setTimeout(() => taskDialog.close(), 0);
+        });
+        
+        
+        document.querySelector("#addProjectButton").addEventListener("click", (e) => {
+            projectDialog.showModal();
+        })
+        
+        const projectForm = projectDialog.querySelector("form")
+        projectForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            appControl.createProject(DOMController.createProject());
+            projectForm.reset();
+            projectDialog.close();
+        
+            DOMController.createProjectList(appControl.getProjects());
+            renderProjects();
+        })
+        projectForm.addEventListener("reset", () => {
+            setTimeout(() => projectDialog.close(), 0);
+        })
     }
 }
