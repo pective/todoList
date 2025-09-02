@@ -8,8 +8,8 @@ export default class Project {
         this.taskList.push(task);
     }
 
-    removeTask(name) {
-        let index = this.taskList.findIndex(e => e.name === name);
+    removeTask(task) {
+        let index = this.taskList.findIndex(e => e.name === task.name);
 
         this.taskList.splice(index, 1);
     }

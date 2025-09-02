@@ -197,5 +197,11 @@ export class DOMController {
         editForm.addEventListener("reset", () => {
             setTimeout(() => editDialog.close(), 0);
         })
+
+        const deleteTaskButton = editForm.querySelector("#deleteTaskButton");
+        deleteTaskButton.addEventListener("click", () => {
+            selectedProject.removeTask(editingTask);
+            DOMController.createTaskList(selectedProject);
+        })
     }
 }
