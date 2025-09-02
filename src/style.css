@@ -79,7 +79,7 @@ li {
     background-color: var(--md-sys-color-surface-container-high);
     justify-content: space-between;
     position: relative;
-    padding-left: 50px;
+    padding-inline: 50px;
 }
 .task-check {
     content: '';
@@ -91,6 +91,24 @@ li {
     border-radius: 3px;
     cursor: pointer;
 }
+
+.task-edit {
+    position: absolute;
+    right: 10px;
+    height: 20px;
+    width: 20px;
+    border: none;
+    cursor: pointer;
+    background-image: url(./imgs/pencil.svg);
+    background-position: center;
+    background-size: cover;
+    background-color: transparent;
+}
+
+#deleteTaskButton {
+    color: var(--md-sys-color-error);
+}
+
 .task-body.checked  {
     text-decoration: line-through;
     color: #bbbbbb;

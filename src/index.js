@@ -15,8 +15,8 @@ const appControl = new App(projectList, selectedProject);
 appControl.createProject(homeProject);
 appControl.createProject(schoolProject);
 
-homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), 2, false));
-homeProject.addTask(new Task("Code", "Finish that website boy", new Date(), 3, false));
+homeProject.addTask(new Task("Dishes", "Put them in the dishwaszer", new Date(), "Low", false));
+homeProject.addTask(new Task("Code", "Finish that website boy", new Date(), "High", false));
 
 DOMController.createProjectList(appControl.getProjects());
 DOMController.createTaskList(selectedProject);

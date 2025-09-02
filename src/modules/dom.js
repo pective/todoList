@@ -1,8 +1,10 @@
 import Task from "./task";
 import Project from "./projects";
 import { selectedProject } from "..";
+import { formatISO } from "date-fns";
 
 const projectContainer = document.querySelector(".project-list")
+let editingTask;
 
 export class DOMController {
     constructor() {}
@@ -27,11 +29,31 @@ export class DOMController {
         const priorityElement = document.createElement("div");
         priorityElement.textContent = task.priority;
 
+        const editButton = document.createElement("button");
+        editButton.type = "button";
+        editButton.classList.add("task-edit");
+
+        editButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const taskEditDialog = document.querySelector("#taskEditDialog");
+            const editForm = taskEditDialog.querySelector("form");
+
+            editingTask = task;
+
+            editForm.querySelector("input[name='taskTitle']").value = task.name || "";
+            editForm.querySelector("input[name='taskDescription']").value = task.description || "";
+            editForm.querySelector("input[name='taskDueDate']").value = formatISO(new Date(task.date), { representation: 'date' }) || "";
+            editForm.querySelector("select[name='taskPriority']").value = String(task.priority ?? "");
+
+            taskEditDialog.showModal();
+        })
+
         taskBody.appendChild(checkBtn);
         taskBody.appendChild(titleElement);
         taskBody.appendChild(descElement);
         taskBody.appendChild(dateElement);
         taskBody.appendChild(priorityElement);
+        taskBody.appendChild(editButton);
 
         if(task.isDone) {
             taskBody.classList.toggle("checked");
@@ -153,6 +175,27 @@ export class DOMController {
         })
         projectForm.addEventListener("reset", () => {
             setTimeout(() => projectDialog.close(), 0);
+        })
+
+        const editDialog = document.querySelector("#taskEditDialog");
+        const editForm = editDialog.querySelector("form");
+        editForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const name = editForm.querySelector("input[name='taskTitle']").value;
+            const description = editForm.querySelector("input[name='taskDescription']").value;
+            const dueDateRaw = editForm.querySelector("input[name='taskDueDate']").value;
+            const priority = editForm.querySelector("select[name='taskPriority']").value;
+
+            editingTask.edit(name, description, dueDateRaw, priority);
+            editingTask = null;
+            editDialog.close();
+
+            DOMController.createTaskList(selectedProject);
+        })
+
+        editForm.addEventListener("reset", () => {
+            setTimeout(() => editDialog.close(), 0);
         })
     }
 }

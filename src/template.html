@@ -58,6 +58,37 @@
             </form>
         </dialog>
 
+        <dialog id="taskEditDialog">
+            <h1>Edit task</h1>
+            <form>
+                <fieldset id="taskTitle">
+                    <legend>Task Title</legend>
+                    <input type="text" name="taskTitle" required>
+                </fieldset>
+                <fieldset id="taskDescription">
+                    <legend>Task Description</legend>
+                    <input type="text" name="taskDescription">
+                </fieldset>
+                <fieldset>
+                    <legend>Due Date</legend>
+                    <input type="date" id="taskDueDate" name="taskDueDate">
+                </fieldset>
+                <fieldset>
+                    <legend>Priority</legend>
+                    <select id="taskPriority" name="taskPriority">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </fieldset>
+                <div class="dialog-buttons">
+                    <button id="deleteTaskButton">Delete</button>
+                    <button type="reset" id="cancelTaskButton">Cancel</button>
+                    <button type="submit">Save Changes</button>
+                </div>
+            </form>
+        </dialog>
+
         <dialog id="projectDialog">
             <h1>Add Project</h1>
             <form>

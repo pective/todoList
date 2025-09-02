@@ -25,6 +25,13 @@ export default class Task {
         return this.isDone;
     }
 
+    edit(name, description, date, priority) {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.priority = priority;
+    }
+
     markDone() {
         this.isDone = !this.isDone;
     }
