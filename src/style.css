@@ -148,7 +148,6 @@ form input[type="text"] {
 
 #taskDialog form input[type="text"] {
     width: 650px;
-    
 }
 
 #taskTitle {
@@ -159,14 +158,13 @@ form input[type="text"] {
     grid-area: 2 / 1 / 3 / 3;
 }
 
-#taskDialog form fieldset {
-    border-radius: 5px;
-    padding: 5px;
-}
-
-#taskDialog form fieldset legend{
+fieldset {
     border-radius: 5px;
     color: var(--md-sys-color-on-surface);
+}
+
+#taskDialog form fieldset {
+    padding: 5px;
 }
 
 ::backdrop {
@@ -187,7 +185,6 @@ form input[type="text"] {
 
 #projectDialog fieldset {
     margin: 20px 0;
-    border-radius: 5px;
 }
 
 .dialog-buttons {
@@ -206,3 +203,17 @@ form input[type="text"] {
     cursor: pointer;
 }
 
+#taskEditDialog {
+    border-radius: 18px;
+    border: none;
+    background-color: var(--md-sys-color-surface-container-high);
+    width: 700px
+}
+
+#taskEditDialog form {
+    display: grid;
+    grid-template: repeat(3, 60px) / repeat(2, 320px);
+    gap: 10px;
+    margin: 10px;
+    justify-content: space-between;
+}
