@@ -13,17 +13,15 @@ document.querySelector("#addTaskButton").addEventListener("click", (e) => {
 
 const taskForm = taskDialog.querySelector("form")
 taskForm.addEventListener("submit", (e) => {
-    e.preventDefault();
     selectedProject.addTask(DOMController.taskFromForm());
     taskForm.reset();
     taskDialog.close();
 
     DOMController.createTaskList(selectedProject);
-});
-taskForm.addEventListener("reset", (e) => {
     e.preventDefault();
-    taskForm.reset();
-    taskDialog.close();
+});
+taskForm.addEventListener("reset", () => {
+    setTimeout(() => taskDialog.close(), 0);
 });
 
 
@@ -41,10 +39,8 @@ projectForm.addEventListener("submit", (e) => {
     DOMController.createProjectList(appControl.getProjects());
     renderProjects();
 })
-projectForm.addEventListener("reset", (e) => {
-    e.preventDefault();
-    projectForm.reset();
-    projectDialog.close();
+projectForm.addEventListener("reset", () => {
+    setTimeout(() => projectDialog.close(), 0);
 })
 
 let projectList = [];
