@@ -13,7 +13,7 @@ const homeProject = new Project("Home");
 const schoolProject = new Project("School");
 export let selectedProject = homeProject;
 
-const appControl = new App(projectList, selectedProject);
+export const appControl = new App(projectList, selectedProject);
 appControl.createProject(homeProject);
 appControl.createProject(schoolProject);
 
@@ -23,25 +23,26 @@ homeProject.addTask(new Task("Code", "Finish that website boy", new Date(), "Hig
 DOMController.createProjectList(appControl.getProjects());
 DOMController.createTaskList(selectedProject);
 
-function renderProjects() {
-    const projectElements = document.querySelectorAll(".project-element");
-    projectElements.forEach((e) => {
-        e.addEventListener("click", () => {
-            const projectName = e.textContent.trim();
-            const proj = appControl.getProjects().find(p => p.name == projectName);
-            if (!proj) return;
+// Delegate clicks so it still works after list re-renders
+const projectContainer = document.querySelector(".project-list");
+projectContainer.addEventListener("click", (e) => {
+    const item = e.target.closest(".project-element");
+    if (!item || !projectContainer.contains(item)) return;
 
-            selectedProject = proj;
+    if (ev.target.closest("button")) return;
 
-            projectElements.forEach((el) => {
-                el.classList.remove("selected");
-                el.style.removeProperty("background");
-            });
-            e.classList.add("selected");
-            e.style.background = "#C8D4E6";
+    const projectName = item.textContent.trim();
+    const proj = appControl.getProjects().find(p => p.name === projectName);
+    if (!proj) return;
 
-            DOMController.createTaskList(selectedProject);
-        })
-    })
-}
-renderProjects()
+    selectedProject = proj;
+
+    projectContainer.querySelectorAll(".project-element").forEach((el) => {
+        el.classList.remove("selected");
+        el.style.removeProperty("background");
+    });
+    item.classList.add("selected");
+    item.style.background = "#C8D4E6";
+
+    DOMController.createTaskList(selectedProject);
+});

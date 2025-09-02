@@ -9,7 +9,7 @@ export default class App {
     }
 
     removeProject(name) {
-        let index = this.projectList.findIndex(name);
+        let index = this.projectList.findIndex(project => project.name === name);
 
         this.projectList.splice(index, 1);
     }
