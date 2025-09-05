@@ -1,5 +1,4 @@
 import "./style.css";
-import "./material-light.css";
 
 import Task from "./modules/task";
 import Project from "./modules/projects";
