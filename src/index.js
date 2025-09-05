@@ -29,7 +29,7 @@ projectContainer.addEventListener("click", (e) => {
     const item = e.target.closest(".project-element");
     if (!item || !projectContainer.contains(item)) return;
 
-    if (ev.target.closest("button")) return;
+    if (e.target.closest("button")) return;
 
     const projectName = item.textContent.trim();
     const proj = appControl.getProjects().find(p => p.name === projectName);
