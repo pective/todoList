@@ -3,11 +3,12 @@ import Project from "./projects";
 import { appControl } from "..";
 import { selectedProject } from "..";
 import { formatISO } from "date-fns";
+import storageControl from "./storage";
 
 const projectContainer = document.querySelector(".project-list")
 let editingTask;
 
-export class DOMController {
+export default class DOMController {
     constructor() {}
 
     static #buildTaskElement(task) {
@@ -63,8 +64,8 @@ export class DOMController {
         checkBtn.addEventListener("click", (e) => {
             e.stopPropagation();
             task.markDone();
-            console.log("check clicked:", task.name);
             taskBody.classList.toggle("checked");
+            storageControl.setProjectsToStorage(appControl);
         });
 
         return taskBody;
@@ -81,6 +82,7 @@ export class DOMController {
             e.stopPropagation();
             appControl.removeProject(project.name);
             DOMController.createProjectList(appControl.getProjects());
+            storageControl.setProjectsToStorage(appControl);
         })
 
         projectElement.appendChild(projectRemove);
@@ -93,7 +95,7 @@ export class DOMController {
         const dueDateRaw = document.querySelector("#taskDialog input[name='taskDueDate']").value;
         const priority = document.querySelector("#taskDialog select[name='taskPriority']").value;
 
-        const dueDate = dueDateRaw ? new Date(dueDateRaw) : null;
+        const dueDate = dueDateRaw ? new Date(dueDateRaw) : "No due date";
 
         return new Task(title, description, dueDate, priority, false);
     }
@@ -158,6 +160,7 @@ export class DOMController {
             taskDialog.close();
         
             DOMController.createTaskList(selectedProject);
+            storageControl.setProjectsToStorage(appControl);
             e.preventDefault();
         });
         taskForm.addEventListener("reset", () => {
@@ -177,6 +180,7 @@ export class DOMController {
             projectDialog.close();
         
             DOMController.createProjectList(appControl.getProjects());
+            storageControl.setProjectsToStorage(appControl);
         })
         projectForm.addEventListener("reset", () => {
             setTimeout(() => projectDialog.close(), 0);
@@ -197,6 +201,7 @@ export class DOMController {
             editDialog.close();
 
             DOMController.createTaskList(selectedProject);
+            storageControl.setProjectsToStorage(appControl);
         })
 
         editForm.addEventListener("reset", () => {
@@ -207,6 +212,7 @@ export class DOMController {
         deleteTaskButton.addEventListener("click", () => {
             selectedProject.removeTask(editingTask);
             DOMController.createTaskList(selectedProject);
+            storageControl.setProjectsToStorage(appControl);
         })
     }
 }
