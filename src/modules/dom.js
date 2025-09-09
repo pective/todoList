@@ -95,7 +95,7 @@ export default class DOMController {
         const dueDateRaw = document.querySelector("#taskDialog input[name='taskDueDate']").value;
         const priority = document.querySelector("#taskDialog select[name='taskPriority']").value;
 
-        const dueDate = dueDateRaw ? new Date(dueDateRaw) : "No due date";
+        const dueDate = dueDateRaw ? new Date(dueDateRaw) : null;
 
         return new Task(title, description, dueDate, priority, false);
     }

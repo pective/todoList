@@ -7,13 +7,22 @@ export default class storageControl {
     static setProjectsToStorage(app) {
         const data = app.getProjects().map((p) => ({
             name: p.name,
-            tasks: p.getTasks().map((t) => ({
-                name: t.name,
-                description: t.description,
-                date: t.date ? new Date(t.date).toISOString() : "No due date",
-                priority: t.priority,
-                isDone: !!t.isDone,
-            })),
+            tasks: p.getTasks().map((t) => {
+                // Treat "No due date" or falsy values as null
+                const hasRealDate = t.date && t.date !== "No due date";
+                let iso = null;
+                if (hasRealDate) {
+                    const d = new Date(t.date);
+                    if (!isNaN(d)) iso = d.toISOString();
+                }
+                return {
+                    name: t.name,
+                    description: t.description,
+                    date: iso,
+                    priority: t.priority,
+                    isDone: !!t.isDone,
+                };
+            }),
         }));
         localStorage.setItem("projects", JSON.stringify(data));
     }
@@ -27,7 +36,7 @@ export default class storageControl {
             return (data || []).map((pd) => {
                 const proj = new Project(pd.name);
                 (pd.tasks || []).forEach((td) => {
-                    const d = td.date ? new Date(td.date) : "No due date";
+                    const d = td.date ? new Date(td.date) : null;
                     proj.addTask(new Task(td.name, td.description, d, td.priority, td.isDone));
                 });
                 return proj;
